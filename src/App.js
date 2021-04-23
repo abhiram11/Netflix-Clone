@@ -1,9 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
-  return (
-    <div className="App">
+  <div className="App">
+
+    
+  </div>
+}
+
+export default App;
+
+/*
+
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -18,8 +27,44 @@ function App() {
           Learn React
         </a>
       </header>
+
+
+*/
+
+/*
+
+  const [login, setLogin] = useState("")
+
+  const boolChoice = ["Yes", "No"]
+
+  function checkUser(item) {
+    if (item === "Yes"){
+      setLogin("Welcome Abhiram!");
+    }
+    else {
+      setLogin("Welcome non-Abhiram!");
+    }
+  }
+
+  return (
+    <div className="App">
+      <h1> Hello! Are you Abhiram?</h1>
+      <ul>
+        { boolChoice.map((item) => {
+          return (
+            <li
+            key={item}
+            onClick = { () => checkUser(item) }
+            style={{padding:"1rem"}}>
+              {item}
+            </li>
+          )
+        })
+      }
+      </ul>
+      <div>
+      {login}
+      </div>
     </div>
   );
-}
-
-export default App;
+*/
