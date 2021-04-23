@@ -1,0 +1,36 @@
+/* check className for just below one */
+.row {
+  margin-left: 20px;
+}
+
+.row_posters {
+  display: flex; /*make it column to row if aspect ratio*/
+  overflow-x: scroll;
+  overflow-y: hidden;
+  padding: 20px;
+}
+
+/*hide the overflow x scroll bar, tells all browser to keep functionalit BUT remove display*/
+.row_posters::-webkit-scrollbar {
+  display: none;
+}
+
+.row_poster {
+  object-fit: contain; /*keeps aspect ratio*/
+  width: 100%;
+  max-height: 100px;
+  margin-right: 10px;
+  transition: 450ms; /*looks smoother, for any reason if size changes, do it slowly*/
+}
+
+.row_poster:hover {
+  transform: scale(1.08); /*this value is ideal sweet spot*/
+}
+
+.row_posterLarge {
+  max-height: 200px;
+}
+
+.row_posterLarge:hover {
+  transform: scale(1.1);
+}
