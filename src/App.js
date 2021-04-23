@@ -1,12 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import Row from './Row';
+import requests from './requests';
 
 function App() {
-  <div className="App">
 
-    
-  </div>
+  return(
+  <div className="App">
+    <Row title ="Netflix Originals" fetchUrl={requests.fetchNetflixOriginals}/>
+    <Row title="Trending Now" fetchUrl={requests.fetchTrending}/>
+  </div>);
 }
 
 export default App;
