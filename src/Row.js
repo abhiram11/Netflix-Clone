@@ -19,7 +19,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
     async function fetchData() {
       const request = await axios.get(fetchUrl);
       //basically appen+ding
-      console.log(request.data.results); // to check the data structure that we get.
+      //   console.log(request.data.results); // to check the data structure that we get.
       setMovies(request.data.results);
       return request;
     }
