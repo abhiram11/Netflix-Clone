@@ -21,6 +21,14 @@ function Banner() {
 
   console.log(movie);
 
+  //truncate extra content by "last word..."
+
+  function truncate(text, maxTolerateLen) {
+    return text?.length > maxTolerateLen
+      ? text.substr(0, maxTolerateLen - 1) + "..."
+      : text;
+  }
+
   return (
     <header
       className="banner"
@@ -39,9 +47,9 @@ function Banner() {
           <button className="banner_button">Play</button>
           <button className="banner_button">My List</button>
         </div>
-        <h1 className="banner_description">{movie?.overview}</h1>
+        <h1 className="banner_description">{truncate(movie?.overview, 150)}</h1>
       </div>
-
+      <div className="banner-fadeBottom" /> {/*make an invisible banner */}
       {/* header has bgImage, title, div > 2 buttons, descriptions */}
     </header>
   );
