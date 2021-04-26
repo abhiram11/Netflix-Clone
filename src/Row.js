@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import YouTube from "react-youtube";
 import axios from "./axios";
 import requests from "./requests";
 //re-listen 29:10, 54:40 of the tutorial!
@@ -30,6 +31,17 @@ function Row({ title, fetchUrl, isLargeRow }) {
 
   console.log(movies);
   // they are hori scrollables
+
+  //Adding youtube popups for trailers
+  const opts = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      //,
+      autoplay: 1, //this will play the video as soon as we click the poster and the popup is shown
+    },
+  };
+
   return (
     <div className="row">
       <h2>{title}</h2>
@@ -45,7 +57,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
           />
         ))}
       </div>
-
+      <YouTube id="v8bZVdTgXoY" opts={opts} />
       {/* it will have title (NF originals, trending, category, etc.) then have Container containing the bunch of posters */}
     </div>
   );
