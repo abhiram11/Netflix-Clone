@@ -35,14 +35,21 @@ function Row({ title, fetchUrl, isLargeRow }) {
   const [trailerUrl, setTrailerUrl] = useState("");
 
   const handleClick = (movie) => {
+    console.log("Enter popup click: Movie :", movie);
     if (trailerUrl) {
       setTrailerUrl("");
       console.log("Popup closed");
     } else {
-      movieTrailer(movie?.name || "") //if name given, the module will automatically search for trailer on youtube, THEN we get a URL as added .then below
+      movieTrailer(movie?.original_title || "") //if name given, the module will automatically search for trailer on youtube, THEN we get a URL as added .then below
         .then((url) => {
           //https://www.youtube.com/watch?v=D6TtASxc6d4
           // basically using something similar to REGEX below
+          console.log(
+            "movie name:",
+            movie?.original_title || "",
+            "and url found:",
+            url
+          );
           const urlParams = new URLSearchParams(new URL(url).search);
           setTrailerUrl(urlParams.get("v"));
         })
