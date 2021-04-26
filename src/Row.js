@@ -5,6 +5,7 @@ import requests from "./requests";
 //re-listen 29:10, 54:40 of the tutorial!
 // very important isLArgeRo!!!!!!!!!!
 import "./Row.css";
+import movieTrailer from "movie-trailer";
 
 const baseUrl = "https://image.tmdb.org/t/p/original/";
 
@@ -24,7 +25,6 @@ function Row({ title, fetchUrl, isLargeRow }) {
       setMovies(request.data.results);
       return request;
     }
-
     fetchData();
   }, [fetchUrl]); // very very important!!!!!!!!!! if different url passed, so it wouldn't re-renders
   //fetchUrl is outside the block
@@ -32,12 +32,31 @@ function Row({ title, fetchUrl, isLargeRow }) {
   console.log(movies);
   // they are hori scrollables
 
+  const [trailerUrl, setTrailerUrl] = useState("");
+
+  const handleClick = (movie) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+      console.log("Popup closed");
+    } else {
+      movieTrailer(movie?.name || "") //if name given, the module will automatically search for trailer on youtube, THEN we get a URL as added .then below
+        .then((url) => {
+          //https://www.youtube.com/watch?v=D6TtASxc6d4
+          // basically using something similar to REGEX below
+          const urlParams = new URLSearchParams(new URL(url).search);
+          setTrailerUrl(urlParams.get("v"));
+        })
+        .catch((error) => console.log(`Error caught!!!!! :`, error));
+      console.log("Popup opened");
+    }
+  };
+
   //Adding youtube popups for trailers
   const opts = {
     height: "390",
     width: "100%",
     playerVars: {
-      //,
+      //https://www.youtube.com/watch?v=D6TtASxc6d4,
       autoplay: 1, //this will play the video as soon as we click the poster and the popup is shown
     },
   };
@@ -49,6 +68,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
         {movies.map((movie) => (
           <img
             key={movie.id}
+            onClick={() => handleClick(movie)}
             className={`row_poster ${isLargeRow && "row_posterLarge"}`}
             src={`${baseUrl}${
               isLargeRow ? movie.poster_path : movie.backdrop_path
@@ -57,7 +77,8 @@ function Row({ title, fetchUrl, isLargeRow }) {
           />
         ))}
       </div>
-      <YouTube id="v8bZVdTgXoY" opts={opts} />
+      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
+      {/* if we have trailer url then only show the video*/}
       {/* it will have title (NF originals, trending, category, etc.) then have Container containing the bunch of posters */}
     </div>
   );
